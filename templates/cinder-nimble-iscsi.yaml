@@ -1,0 +1,36 @@
+parameter_defaults: # 1
+  CinderEnableIscsiBackend: false
+  CinderEnableRbdBackend: false
+  CinderEnableNfsBackend: false
+  NovaEnableRbdBackend: false
+
+
+parameter_defaults:
+  ControllerExtraConfig: # 3
+    cinder::config::cinder_config:
+        nimble/use_multipath_for_image_xfer:
+            value: True
+        nimble/volume_driver:
+            value: cinder.volume.drivers.nimble.NimbleISCSIDriver
+        nimble/nimble_subnet_label:
+            value: management
+        nimble/Nimble_pool_name:
+            value: default
+        nimble/enable_unsupported_driver:
+            value: True
+        nimble/san_ip:
+            value: <nimble_ip>
+        nimble/san_login:
+            value: <nimble_password>
+        nimble/san_password:
+            value: <nimble_password>
+        nimble/volume_backend_name:
+            value: nimble_iscsi
+        nimble/num_volume_device_scan_tries:
+            value: 10
+        nimble/Image_volume_cache_enabled:
+            value: True
+        nimble/volume_clear:
+            value: zero
+
+    cinder_user_enabled_backends: ['nimble_iscsi'] # 7
