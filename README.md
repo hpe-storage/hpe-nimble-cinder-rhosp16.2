@@ -83,7 +83,7 @@ parameter_defaults:
   ControllerExtraConfig:
 ```
 
-Sample files for iSCSI backend is available in [templates](https://github.com/mohdadilntl/hpe-nimble-cinder-rhosp16.2/blob/master/templates) folder for reference.
+Sample files for iSCSI backend is available in [templates](https://github.com/hpe-storage/hpe-nimble-cinder-rhosp16.2/blob/master/templates) folder for reference.
 
 #### Additional Help
 
