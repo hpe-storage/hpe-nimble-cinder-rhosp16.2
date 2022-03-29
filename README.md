@@ -96,7 +96,7 @@ cinder create --name  --volume-type <volume-type> <size>
 And "cinder list" to verify the results.    
 ```
     [stack@cld13b4 ~]$ source overcloudrc
-(overcloud) [stack@manager1 ~]$ cinder create --name test --volume-type nimble_1 2
+(overcloud) [stack@manager1 ~]$ cinder create --name test --volume-type nimble 2
 +--------------------------------+--------------------------------------+
 | Property                       | Value                                |
 +--------------------------------+--------------------------------------+
