@@ -12,7 +12,7 @@ This page provides steps to deploy & configure Nimble backends for RHOSP16.2.
 
 ## Steps
 
-### 1.	Prepare the Environment Files for containers and cinder backend
+### 1.  Prepare the Environment Files for containers and cinder backend
 
 #### 1.1 Environment File for cinder backend
 
@@ -33,7 +33,7 @@ Sample files for iSCSI backend is available in [templates](https://github.com/hp
 For further details of Nimble cinder driver, kindly refer documentation [here](https://docs.openstack.org/cinder/latest/configuration/block-storage/drivers/nimble-volume-driver.html)
 
 
-### 2.	Deploy the overcloud and configured backends
+### 2.  Deploy the overcloud and configured backends
 
 After creating ```cinder-nimble-iscsi.yaml``` file with appropriate backends, deploy the backend configuration by running the openstack overcloud deploy command using the templates option.
 Use the ```-e``` option to include the environment file ```cinder-nimble-iscsi.yaml```.
@@ -46,9 +46,9 @@ openstack overcloud deploy --templates /usr/share/openstack-tripleo-heat-templat
     -e /home/stack/containers-prepare-parameter.yaml \
     -e /home/stack/templates/cinder-nimble-iscsi.yaml \
 ```
-### 3.	Verify the configured changes
+### 3.  Verify the configured changes
 
-3.1	In order to verify the cinder-volume service is actually running. This can be done by sourcing the 'overcloudrc' file on the director,
+3.1 In order to verify the cinder-volume service is actually running. This can be done by sourcing the 'overcloudrc' file on the director,
 and then run "openstack volume service list"
 ```
 (overcloud) [stack@manager1 ~]$ openstack volume service list
