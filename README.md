@@ -2,7 +2,7 @@
 
 ## Overview
 
-This page provides steps to deploy & configure Nimble backends for RHOSP16.2.
+This page provides steps to deploy & configure Nimble backend driver for RHOSP16.2.
 
 ## Prerequisites
 
@@ -12,9 +12,9 @@ This page provides steps to deploy & configure Nimble backends for RHOSP16.2.
 
 ## Steps
 
-### 1.  Prepare the Environment Files for containers and cinder backend
+### 1.  Prepare the Environment File for  nimble backend
 
-#### 1.1 Environment File for cinder backend
+#### 1.1 Environment File for nimble backend
 
 The environment file is an OSP director environment file. The environment file contains the settings for each backend you want to define.
 
@@ -48,7 +48,7 @@ openstack overcloud deploy --templates /usr/share/openstack-tripleo-heat-templat
 ```
 ### 3.  Verify the configured changes
 
-3.1 In order to verify the cinder-volume service is actually running. This can be done by sourcing the 'overcloudrc' file on the director,
+3.1 In order to verify the cinder-volume service is actually running. This can be done by sourcing the "overcloudrc" file on the director,
 and then run "openstack volume service list"
 ```
 (overcloud) [stack@manager1 ~]$ openstack volume service list
@@ -58,21 +58,18 @@ and then run "openstack volume service list"
 | cinder-scheduler | overcloud-controller-1        | nova | enabled | up    | 2022-03-29T10:29:01.000000 |
 | cinder-scheduler | overcloud-controller-2        | nova | enabled | up    | 2022-03-29T10:29:01.000000 |
 | cinder-scheduler | overcloud-controller-0        | nova | enabled | up    | 2022-03-29T10:29:02.000000 |
-| cinder-volume    | hostgroup@tripleo_iscsi       | nova | enabled | down  | 2022-03-25T08:54:34.000000 |
 | cinder-volume    | hostgroup@nimble              | nova | enabled | up    | 2022-03-25T08:54:43.000000 |
-| cinder-backup    | overcloud-controller-0        | nova | enabled | down  | 2022-03-22T14:11:09.000000 |
 | cinder-backup    | overcloud-controller-2        | nova | enabled | up    | 2022-03-29T10:29:01.000000 |
 +------------------+-------------------------------+------+---------+-------+----------------------------+
 
 ```
-As it is clear in above output cinder-volume service is up and running, please check steps 3.4 to configure backend for cinder-volume service.
+As it is clear in above output cinder-volume service is up and running.
 
 3.2 In a production environment with three controller nodes, it will be necessary to determine which node is running the cinder-volume service. One
   way to do that is to run "pcs status" on any controller, and the output will reveal where the cinder-volume service is currently running.
 ```
 [heat-admin@overcloud-controller-0 ~]$ sudo pcs status|grep openstack-cinder-volume-podman-0
     * openstack-cinder-volume-podman-0  (ocf::heartbeat:podman):        Started overcloud-controller-1
-  * openstack-cinder-volume-podman-0_monitor_60000 on overcloud-controller-0 'error' (1): call=586, status='Timed Out', exitreason='', last-rc-change='2022-03-22 14:10:48Z', queued=0ms, exec=0ms
 ```
 It is clear from the above output of "pcs status" that cinder-volume service is running on controller 1 where other controllers are controller 0 and controller 2.
 
