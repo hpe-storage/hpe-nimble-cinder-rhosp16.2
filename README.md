@@ -46,6 +46,8 @@ openstack overcloud deploy --templates /usr/share/openstack-tripleo-heat-templat
     -e /home/stack/containers-prepare-parameter.yaml \
     -e /home/stack/templates/cinder-nimble-iscsi.yaml \
 ```
+The contents of containers-prepare-parameter.yaml file include the parameters for preparing your container images, for more information kindly refer documentation [here](https://access.redhat.com/documentation/en-us/red_hat_openstack_platform/16.2/html/director_installation_and_usage/assembly_preparing-for-director-installation#preparing-container-images)
+
 ### 3.  Verify the configured changes
 
 3.1 In order to verify the cinder-volume service is actually running. This can be done by sourcing the "overcloudrc" file on the director,
@@ -71,7 +73,8 @@ As it is clear in above output cinder-volume service is up and running.
 [heat-admin@overcloud-controller-0 ~]$ sudo pcs status|grep openstack-cinder-volume-podman-0
     * openstack-cinder-volume-podman-0  (ocf::heartbeat:podman):        Started overcloud-controller-1
 ```
-It is clear from the above output of "pcs status" that cinder-volume service is running on controller 1 where other controllers are controller 0 and controller 2.
+It is clear from the above output of "pcs status" that cinder-volume service is running on controller-1 where other controllers are controller-0 and controller-2.
+You may list out all controllers and compute node on undercloud by sourcing "stackrc" file and running command "openstack server list".
 
 3.3. Go to the controller node on which cinder-volume service is running and execute "sudo podman exec -it openstack-cinder-volume-podman-0 bash" and verify that the backend details are visible in ```/etc/cinder/cinder.conf``` in the cinder-volume container
 
@@ -92,7 +95,7 @@ volume_driver=cinder.volume.drivers.nimble.NimbleISCSIDriver
 backend_host=hostgroup
 ```
 3.4 To verify that the test volume can be successfully created go the undercloud and source "overcloudrc" and execute below command to create "test" volume.
-cinder create --name  --volume-type <volume-type> <size>
+To create cinder volume please follow this format "cinder create --name  --volume-type <volume-type> <size>"
 And "cinder list" to verify the results.    
 ```
     [stack@cld13b4 ~]$ source overcloudrc
