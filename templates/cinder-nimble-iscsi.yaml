@@ -13,13 +13,13 @@ parameter_defaults: # 1
         nimble/san_ip:
             value: <nimble_ip>
         nimble/san_login:
-            value: <nimble_password>
+            value: <nimble_username>
         nimble/san_password:
             value: <nimble_password>
         nimble/volume_backend_name:
-            value: nimble_iscsi
+            value: nimble
         nimble/num_volume_device_scan_tries:
             value: 10
         nimble/volume_clear:
             value: zero
-    cinder_user_enabled_backends: ['nimble_iscsi'] # 7
+    cinder_user_enabled_backends: ['nimble'] # 7
