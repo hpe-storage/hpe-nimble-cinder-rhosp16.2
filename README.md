@@ -30,8 +30,7 @@ Sample files for iSCSI backend is available in [templates](https://github.com/hp
 
 #### Additional Help
 
-For further details of Nimble cinder driver, kindly refer documentation [here](https://docs.openstack.org/cinder/latest/configuration/block-storage/drivers/nimble-volume-driver.html)
-
+For further details of Nimble cinder driver, kindly refer documentation [here](https://docs.openstack.org/cinder/train/drivers.html#nimbleiscsidriver)
 
 ### 2.  Deploy the overcloud and configured backends
 
@@ -80,16 +79,16 @@ You may list out all controllers and compute node on undercloud by sourcing "sta
 
 Given below is an example of iSCSI backend details.
 ```
-[nimble_iscsi]
+[nimble]
 image_volume_cache_enabled=True
 nimble_pool_name=default
 nimble_subnet_label=management
 num_volume_device_scan_tries=10
-san_ip=<3par_ip>
-san_login=<3par_username>
-san_password=<3par_password>
+san_ip=<nimble_ip>
+san_login=<nimble_username>
+san_password=<nimble_password>
 use_multipath_for_image_xfer=True
-volume_backend_name=nimble_iscsi
+volume_backend_name=nimble
 volume_clear=zero
 volume_driver=cinder.volume.drivers.nimble.NimbleISCSIDriver
 backend_host=hostgroup
